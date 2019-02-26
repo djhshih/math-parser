@@ -103,7 +103,7 @@ symbol = L.symbol sc
 parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")
 
--- | Integer.
+-- | Floating point value.
 float :: Parser Scientific
 float = lexeme (L.scientific)
 
