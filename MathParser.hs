@@ -9,6 +9,7 @@ import Data.Void
 import Text.Megaparsec                  -- megaparsec
 import Text.Megaparsec.Char
 import qualified Text.Megaparsec.Char.Lexer as L
+import Data.Scientific
 
 
 {-
@@ -52,7 +53,7 @@ data RBinOp
 data AExpr
   = FuncAExpr String [Expr]
   | Var String
-  | FConst Double
+  | FConst Scientific
   | Neg AExpr
   | ABinary ABinOp AExpr AExpr
   deriving (Show)
@@ -103,8 +104,8 @@ parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")
 
 -- | Integer.
-float :: Parser Double
-float = lexeme L.float
+float :: Parser Scientific
+float = lexeme (L.scientific)
 
 -- | Comma.
 comma :: Parser String
